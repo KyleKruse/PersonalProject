@@ -1,0 +1,30 @@
+/* Name: Kyle Kruse
+*  Date: 18 Mar 2019
+*  Project: Prompt #4
+
+*  Write a program that prints a table of all the Roman numerals of the decimal numbers in the range of 1 to 100
+*  Roman numerals are represented by the following characters:
+*  I, V, X, L, C, D, M
+*  Repeating a Roman numeral up to three times represents the addition of the number,
+*    whereas V, L, and D cannot be repeated.
+*
+*/
+
+#include <stdlib.h>
+#include <stdio.h>
+
+// array of Roman numerals
+
+// some sort of pretext... Romanboi's Numerals
+
+// password protection of the program (idf)
+
+// user input and validation
+
+// loop to break down the number into largest -> smallest unique Roman numerals
+
+// output the Roman numberal
+
+// ???
+
+// profit

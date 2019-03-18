@@ -1,0 +1,10 @@
+Introducing the ROMANBOI 5000!
+
+Assuming you know the password to the program (hint: it's "idf") it will:
+    Ask you for a number
+    Convert said number into a Roman numeral
+    Output aforementioned Roman numeral
+
+The program will only accept numbers as input. These numbers are restricted to between 1 and 1000.
+
+There's also some surprises for you to find. (hint: What numbers are funny?)

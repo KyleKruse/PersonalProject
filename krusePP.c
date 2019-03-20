@@ -64,16 +64,12 @@ int main(void)
         {
             case 'Y': // Yes option
                 printf("\n");
-                choices();
                 break;
             
             case 'N': // No option
                 printf("\n");
                 printf("Okay, guess we're done here... It's not you... it's me.");
                 pass = 0;
-                break;
-            
-            case 0:
                 break;
         
             default:
@@ -303,7 +299,9 @@ int numberify(void) // Converts a number between 1 and 1000 into a Roman numeral
     int indexer = 0; // Holds the index position for the userRoman array
     char tempChar = 0; // Temporary holding for user's character input
     char userRoman[16] = {0}; // The array containing the user's Roman numeral
-    int doMaths = 0; // Flag to allow loop further down to convert numerals into numbers. If no numerals were entered, will not utilize loop
+    int romanExist = 0; // Flag to for if there was a numeral inputted. Will run error checking on the inputted numeral. Set by switchcases
+    int romanError = 0; // Flag to be tripped if there is an error in the user's inputted roman numeral
+    int doMaths = 0; // Flag to allow loop further down to convert numerals into numbers. Set by romanExist function
     int i = 0; // Used for for loop to do maths
     int result = 0; // Final returned result from converting numerals to numbers
 
@@ -318,8 +316,6 @@ int numberify(void) // Converts a number between 1 and 1000 into a Roman numeral
     {
         printf("Please enter character %d: ", (indexer + 1));
         fscanf(stdin, " %c", &tempChar); // The space before the %c is mucho importante
-        //fgets(&tempChar, 2, stdin);    // Other attempted input gatherers
-        //tempChar = getchar();
 
         switch (tempChar)
         {   
@@ -335,49 +331,49 @@ int numberify(void) // Converts a number between 1 and 1000 into a Roman numeral
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0; // clear tempChar
-                doMaths = 1; // Sets flag to allow numerals to numbers loop below
+                romanExist = 1; // Sets flag to allow numerals to numbers loop below
                 break;
 
             case 'V': // V option
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0;
-                doMaths = 1;
+                romanExist = 1;
                 break;
             
             case 'X': // X option
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0;
-                doMaths = 1;
+                romanExist = 1;
                 break;
             
             case 'L': //L option
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0;
-                doMaths = 1;
+                romanExist = 1;
                 break;
             
             case 'C': // C option
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0;
-                doMaths = 1;
+                romanExist = 1;
                 break;
             
             case 'D': // D option
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0;
-                doMaths = 1;
+                romanExist = 1;
                 break;
             
             case 'M': // M option
                 userRoman[indexer] = tempChar;
                 indexer++;
                 tempChar = 0;
-                doMaths = 1;
+                romanExist = 1;
                 break;
         
             default: // Catch-all for anything other than accepted characters
@@ -385,72 +381,168 @@ int numberify(void) // Converts a number between 1 and 1000 into a Roman numeral
         }
     }
 
-    if (doMaths == 1) // Additions
+    // Validate user's inputted Roman numeral is correct
+    // take flag from above switchcases "romanExist"
+    // if(romanExist == 1) --> check Roman numeral
+            // if correct, doMaths = 1
+            // else print improper Roman numeral
+
+    if (romanExist == 1)
     {
-        printf("Your inputted Roman numeral is: ");
-        for (i = 0; i < indexer; i++)
-        {
-            printf("%c", userRoman[i]);
-        }
-        printf("\n");
-        
-        for (i = 0; i < indexer; i++)
+        // check roman numeral, if good --> doMaths = 1
+        for (i = 0; i < indexer && romanError ==0; i++)
         {
             switch (userRoman[i])
             {
-                case 'M':
-                    result += 1000;
-                    break;
-                
-                case 'D':
-                    result += 500;
-                    break;
-                
-                case 'C':
-                    if (userRoman[i+1] == 'D' || userRoman[i+1] == 'M')
+                case 'I': // I option
+                    if (userRoman[i+1] == 'I')
                     {
-                        result -= 100;
+                        if (userRoman[i+2] == 'I')
+                        {
+                            //Dank, it's III
+                        }
+                        else
+                        {
+                            romanError++;
+                        }
+                        
                     }
-                    else
+
+                    if (userRoman[i+1] == 'V')
                     {
-                        result += 100;
+
                     }
-                    break;
-                
-                case 'L':
-                    result += 50;
+
+                    if (userRoman[i+1] == 'X')
+                    {
+
+                    }
                     break;
 
-                case 'X':
-                    if (userRoman[i+1] == 'L' || userRoman[i+1] == 'C')
-                    {
-                        result -= 10;
-                    }
-                    else
-                    {
-                        result += 10;
-                    }
+                case 'V': // V option
+                    userRoman[indexer] = tempChar;
+                    indexer++;
+                    tempChar = 0;
+                    romanExist = 1;
                     break;
                 
-                case 'V':
-                    result += 5;
+                case 'X': // X option
+                    userRoman[indexer] = tempChar;
+                    indexer++;
+                    tempChar = 0;
+                    romanExist = 1;
                     break;
                 
-                case 'I':
-                    if (userRoman[i+1] == 'V' || userRoman[i+1] == 'X')
-                    {
-                        result -= 1;
-                    }
-                    else
-                    {
-                        result += 1;
-                    }
+                case 'L': //L option
+                    userRoman[indexer] = tempChar;
+                    indexer++;
+                    tempChar = 0;
+                    romanExist = 1;
+                    break;
+                
+                case 'C': // C option
+                    userRoman[indexer] = tempChar;
+                    indexer++;
+                    tempChar = 0;
+                    romanExist = 1;
+                    break;
+                
+                case 'D': // D option
+                    userRoman[indexer] = tempChar;
+                    indexer++;
+                    tempChar = 0;
+                    romanExist = 1;
+                    break;
+                
+                case 'M': // M option
+                    userRoman[indexer] = tempChar;
+                    indexer++;
+                    tempChar = 0;
+                    romanExist = 1;
                     break;
             
-                default:
-                    printf("Something went wrong in the maths \n");
+                default: // Catch-all for anything other than accepted characters
+                    printf("Invalid entry, try again \n");
             }
         }
-        printf("Your number is: %d \n\n", result);
+
+
+
+
+
+
+
+
+
+
+
+        if (doMaths == 1) // Additions
+        {
+            printf("Your inputted Roman numeral is: ");
+            for (i = 0; i < indexer; i++)
+            {
+                printf("%c", userRoman[i]);
+            }
+            printf("\n");
+            
+            for (i = 0; i < indexer; i++)
+            {
+                switch (userRoman[i])
+                {
+                    case 'M':
+                        result += 1000;
+                        break;
+                    
+                    case 'D':
+                        result += 500;
+                        break;
+                    
+                    case 'C':
+                        if (userRoman[i+1] == 'D' || userRoman[i+1] == 'M')
+                        {
+                            result -= 100;
+                        }
+                        else
+                        {
+                            result += 100;
+                        }
+                        break;
+                    
+                    case 'L':
+                        result += 50;
+                        break;
+
+                    case 'X':
+                        if (userRoman[i+1] == 'L' || userRoman[i+1] == 'C')
+                        {
+                            result -= 10;
+                        }
+                        else
+                        {
+                            result += 10;
+                        }
+                        break;
+                    
+                    case 'V':
+                        result += 5;
+                        break;
+                    
+                    case 'I':
+                        if (userRoman[i+1] == 'V' || userRoman[i+1] == 'X')
+                        {
+                            result -= 1;
+                        }
+                        else
+                        {
+                            result += 1;
+                        }
+                        break;
+                
+                    default:
+                        printf("Something went wrong in the maths \n");
+                }
+            }
+            printf("Your number is: %d \n\n", result);
+        }
     }
 }
